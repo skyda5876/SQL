@@ -1,0 +1,53 @@
+CREATE TABLE singers (id INTEGER PRIMARY KEY, name TEXT);
+INSERT INTO singers VALUES (1, "Selena Gomez");
+INSERT INTO singers VALUES (2, "Arinana Grande");
+INSERT INTO singers VALUES (3, "Sam Smith");
+INSERT INTO singers VALUES (4, "Taylor Swift");
+INSERT INTO singers VALUES (5, "Ed Sheeran");
+INSERT INTO singers VALUES (6, "Justin Bieber");
+INSERT INTO singers VALUES (7, "Dua Lipa");
+INSERT INTO singers VALUES (8, "Harry Styles");
+INSERT INTO singers VALUES (9, "Russ");
+INSERT INTO singers VALUES (10, "Miley Cyrus");
+
+CREATE TABLE genre (id INTEGER PRIMARY KEY, type TEXT, singer_id INTEGER);
+INSERT INTO genre VALUES (1, "pop", 1);
+INSERT INTO genre VALUES (2, "pop", 2);
+INSERT INTO genre VALUES (3, "pop", 3);
+INSERT INTO genre VALUES (4, "country", 4);
+INSERT INTO genre VALUES (5, "folk-pop", 5);
+INSERT INTO genre VALUES (6, "pop", 6);
+INSERT INTO genre VALUES (7, "pop", 7);
+INSERT INTO genre VALUES (8, "pop", 8);
+INSERT INTO genre VALUES (9, "rap", 9);
+INSERT INTO genre VALUES (10, "pop", 10);
+
+CREATE TABLE friendships (id INTEGER PRIMARY KEY, singer1_id INTEGER, singer2_id INTEGER);
+INSERT INTO friendships VALUES (1, 1, 4);
+INSERT INTO friendships VALUES (2, 2, 6);
+INSERT INTO friendships VALUES (3, 3, 7);
+INSERT INTO friendships VALUES (4, 4, 1);
+INSERT INTO friendships VALUES (5, 5, 10);
+INSERT INTO friendships VALUES (6, 6, 2);
+INSERT INTO friendships VALUES (7, 7, 3);
+INSERT INTO friendships VALUES (8, 8, 9);
+INSERT INTO friendships VALUES (9, 9, 8);
+INSERT INTO friendships VALUES (10, 10, 5);
+
+SELECT singers.name, genre.type
+FROM singers
+JOIN genre
+ON singers.id =genre.singer_id
+GROUP BY type, name;
+
+SELECT singers.name,friendships.singer1_id, friendships.singer2_id
+FROM singers
+JOIN friendships
+ON singers.id = friendships.singer1_id;
+
+SELECT a.name, b.name
+FROM friendships
+JOIN singers a
+ON a.id = friendships.singer1_id
+JOIN singers b 
+ON b.id = friendships.singer2_id;
